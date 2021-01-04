@@ -20,7 +20,6 @@ $datenow = date('Y-m-d');
 $queryworkio = "SELECT MAX(workdate) as lastdate, workin, workout FROM tbl_work_io WHERE m_id=$m_id AND workdate='$datenow' ";
 $resultio = mysqli_query($condb, $queryworkio) or die ("Error in query: $queryworkio " . mysqli_error());
 $rowio = mysqli_fetch_array($resultio);
-print_r($rowio);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,40 +86,6 @@ print_r($rowio);
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- Navbar Search -->
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              data-widget="navbar-search"
-              href="#"
-              role="button"
-            >
-              <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-              <form class="form-inline">
-                <div class="input-group input-group-sm">
-                  <input
-                    class="form-control form-control-navbar"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                    <button
-                      class="btn btn-navbar"
-                      type="button"
-                      data-widget="navbar-search"
-                    >
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>
 
           <!-- Messages Dropdown Menu -->
           <li class="nav-item dropdown">
@@ -984,113 +949,108 @@ print_r($rowio);
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="container">
-        <div class="row">
-          <div class="col col-sm-3">
-          <img src="img/<?php echo $rowm['m_img'];?>" width='70%'>
-          <br>
-          <b>
-          <?php echo $rowm['m_firstname'].$rowm['m_name']. ' '.$rowm['m_lastname'];?>
-          <br>
-          ตำแหน่ง : <?php echo $rowm['m_position'];?>
-          </b>
-          <br>
-          <a href="logout.php" class="btn btn-danger btn-sm"> logout </a>
-          </div>
-          
-        <div class="col col-sm-9">
-          <h3> ลงเวลาเข้า-ออกงาน <?php echo date('d-m-Y');?></h3>
-          <form action="save.php"  method="post" class="form-horizontal">
-            <div class="form-group row">
-              <div class="col col-sm-2">
-                <label for="m_id">รหัสพนักงาน</label>
-                <input type="text" class="form-control"   name="m_id"   placeholder="รหัสพนักงาน"   value="<?php echo $rowm['m_id'];?>"  readonly>
-              </div>
-              <div class="col col-sm-3">
-                <label for="m_id">เวลาเข้างาน</label>
-                <?php if(isset($rowio['workin'])){ ?>
-                <input type="text" class="form-control"   name="workin"   value="<?php echo $rowio['workin'];?>"  disabled>
-                <?php }else{ ?>
-                <input type="text" class="form-control"   name="workin"   value="<?php echo date('H:i:s');?>"  readonly>
-                <?php  } ?>
-              </div>
-              <div class="col col-sm-3">
-                <label for="m_id">เวลาออกงาน</label>
-                <?php
-                if($timenow > '17:00:00'){
-                if(isset($rowio['workout'])){ ?>
-                <input type="text" class="form-control"   name="workout"  value="<?php echo $rowio['workout'];?>"  disabled>
-                <?php }else{ ?>
-                <input type="text" class="form-control"   name="workout"  value="<?php echo date('H:i:s');?>"  readonly>
-                <?php
-                } //if(isset($rowio['workout'])){
-                }else{  //if($timenow > '11:00:00'){
-                echo '<br><font color="red"> หลัง 17.00 น. </font>';
-                } ?>
-              </div>
-              <div class="col col-sm-1">
-                <label>-</label>
-                <button type="submit" class="btn btn-primary">บันทึก</button>
-              </div>
+          <div class="row">
+            <div class="col col-sm-12">
+              <h3  class="jumbotron" align="center">USER PROFILE</h3>
             </div>
-          </form>
-          <h3>List</h3>
-          <?php
-          $querylist = "SELECT * FROM tbl_work_io WHERE m_id = $m_id ORDER BY workdate DESC";
-          $resultlist = mysqli_query($condb, $querylist)  or die("Error:" . mysqli_error($querylist));
-          echo "
-          <table class='table table-bordered table-striped'>
-          <thead>
-            <tr class='table-danger'>
-              <td>date</td>
-              <td>work-in</td>
-              <td>work-out</td>
-            </tr>
-            </thead>
-            ";
-
-            foreach ($resultlist as $value) {
-            echo "<tr>";
-              echo "<td>" .$value["workdate"] .  "</td> ";
-              echo "<td>" .$value["workin"] .  "</td> ";
-              echo "<td>" .$value["workout"] .  "</td> ";
-            echo "</tr>";
-            }
-          echo '</table>';
-          ?>
-        </div>
-        </div>
+          </div>
         </div>
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <section class="content">
-          <!-- Horizontal Form -->
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-4"></div>
-              <div class="col col-sm-4">
-                <form action="authen.php"  method="post">
-                  <div class="form-group">
-                    <label for="m_username">รหัสพนักงาน</label>
-                    <input type="text" class="form-control" id="m_username" name="m_username"   placeholder="รหัสพนักงาน" minlength="2"  required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="m_password" placeholder="รหัสผ่าน" minlength="2"  required>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Login</button>
-                </form>
+        
+        <div class="container">
+          <div class="row">
+            <div class="col col-sm-3">
+              <img src="img/<?php echo $rowm['m_img'];?>" width='70%'>
+              <br>
+              <b>
+              <?php echo $rowm['m_firstname'].$rowm['m_name']. ' '.$rowm['m_lastname'];?>
+              <br>
+              ตำแหน่ง : <?php echo $rowm['m_position'];?>
+              </b>
+              <br>
+              <a href="logout.php" class="btn btn-danger btn-sm"> logout </a>
+            </div>
+
+            <div class="col col-sm-9">
+              <h3> ลงเวลาเข้า-ออกงาน <?php echo date('d-m-Y');?></h3>
+              <form action="save.php"  method="post" class="form-horizontal">
+              <div class="form-group row">
+                <div class="col col-sm-2">
+                  <label for="m_id">รหัสพนักงาน</label>
+                  <input type="text" class="form-control"   name="m_id"   placeholder="รหัสพนักงาน"   value="<?php echo $rowm['m_id'];?>"  readonly>
+                </div>
+
+                <div class="col col-sm-3">
+                  <label for="m_id">เวลาเข้างาน</label>
+                  <?php if(isset($rowio['workin'])){ ?>
+                  <input type="text" class="form-control"   name="workin"   value="<?php echo $rowio['workin'];?>"  disabled>
+                  <?php }else{ ?>
+                  <input type="text" class="form-control"   name="workin"   value="<?php echo date('H:i:s');?>"  readonly>
+                  <?php  } ?>
+                </div>
+
+                <div class="col col-sm-3">
+                  <label for="m_id">เวลาออกงาน</label>
+                    <?php
+                    if($timenow > '17:30:00'){
+                      if(isset($rowio['workout'])){ ?>
+                      <input type="text" class="form-control"   name="workout"  value="<?php echo $rowio['workout'];?>"  disabled>
+                      <?php }else{ ?>
+                      <input type="text" class="form-control"   name="workout"  value="<?php echo date('H:i:s');?>"  readonly>
+                      <?php
+                      } //if(isset($rowio['workout'])){
+                    }else{  //if($timenow > '11:00:00'){
+                    echo '<br><font color="red"> หลัง 17.30 น. </font>';
+                    } ?>
+                </div>
+
+                <div class="col col-sm-1">
+                  <label>-</label>
+                  <button type="submit" class="btn btn-primary">บันทึก</button>
+                </div>
               </div>
+              </form>
+              <h3>List</h3>
+              <?php
+              $querylist = "SELECT * FROM tbl_work_io WHERE m_id = $m_id ORDER BY workdate DESC";
+              $resultlist = mysqli_query($condb, $querylist)  or die("Error:" . mysqli_error($querylist));
+              echo "
+              <table class='table table-bordered table-striped'>
+              <thead>
+                <tr class='table-danger'>
+                  <td>date</td>
+                  <td>work-in</td>
+                  <td>work-out</td>
+                </tr>
+              </thead>
+              ";
+
+              foreach ($resultlist as $value) {
+              echo "<tr>";
+                echo "<td>" .$value["workdate"] .  "</td> ";
+                echo "<td>" .$value["workin"] .  "</td> ";
+                echo "<td>" .$value["workout"] .  "</td> ";
+              echo "</tr>";
+              }
+            echo '</table>';
+            ?>
             </div>
           </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row">
+          </div>
+        </div>
           <!-- /.card -->
-        </section>
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
         <strong
-          >Copyright &copy; 2014-2020
+          >Copyright &copy; 2020-2021
           <a href="https://app.microtronic.biz">DOMNICK WORKFLOW BETA</a>.</strong
         >
         All rights reserved.

@@ -18,7 +18,7 @@ session_start();
                       $_SESSION["m_level"] = $row["m_level"];
 
                       if($_SESSION["m_level"]=="admin"){ 
-                       echo 'R U ADMIN เอาไปทำต่อเองนะจ้ะ';
+                       echo 'R U ADMIN รอทำต่อนะจ้ะ';
                       }
                       if($_SESSION["m_level"]=="staff"){
                         //echo 'R U staff';
