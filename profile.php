@@ -76,7 +76,7 @@ $rowio = mysqli_fetch_array($resultio);
             ></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="index.php" class="nav-link">Home</a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -225,7 +225,7 @@ $rowio = mysqli_fetch_array($resultio);
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
+        <a href="index.php" class="brand-link">
           <img
             src="dist/img/AdminLTELogo.png"
             alt="AdminLTE Logo"
@@ -288,19 +288,19 @@ $rowio = mysqli_fetch_array($resultio);
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./index.html" class="nav-link active">
+                    <a href="./index.php" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Dashboard v1</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index2.html" class="nav-link">
+                    <a href="./index.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Dashboard v2</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index3.html" class="nav-link">
+                    <a href="./index.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Dashboard v3</p>
                     </a>
