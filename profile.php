@@ -63,7 +63,26 @@ $rowio = mysqli_fetch_array($resultio);
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css" />
+
+    <!-- style button center -->
+    <style>
+      .container_c { 
+        height: 200px;
+        position: relative;
+        border: 3px solid green; 
+      }
+
+      .center_c {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
   </head>
+
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
       <!-- Navbar -->
@@ -969,8 +988,13 @@ $rowio = mysqli_fetch_array($resultio);
               <br>
               ตำแหน่ง : <?php echo $rowm['m_position'];?>
               </b>
-              <br>
-              <a href="logout.php" class="btn btn-danger btn-sm"> logout </a>
+              <br>              
+              <div class="container">
+                <div class="center">
+                  <a href="logout.php" class="btn btn-danger"> logout </a>
+                  <a href="https://app.microtronic.biz/getlocal.php" class="btn btn-info"> CheckIn </a> 
+                </div>  
+              </div>                           
             </div>
 
             <div class="col col-sm-9">
